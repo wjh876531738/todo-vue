@@ -5,15 +5,16 @@
 
       <mu-card-title :title="key" />
 
-      <mu-flexbox justify="flex-start" wrap="wrap" >
-        <mu-flexbox-item v-for="event in eventArr" :key="event.id" class="flex-item">
+      <div class="box">
+        <div v-for="event, index in eventArr" :key="event.id" class="card" >
           <mu-paper :class="getPaperSize(eventArr.length)" :zDepth="2">
             <mu-badge v-if="showBadge" :content="getDayDistince" class="badge" circle primary />
             <h3>{{ event.date }}</h3>
             <span>{{ event.content }}</span>
           </mu-paper>
-        </mu-flexbox-item>
-      </mu-flexbox>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -24,7 +25,7 @@ export default {
   name: 'Memory',
   data () {
     return {
-      showBadge: false,
+      showBadge: true,
       dateData: {
         'study': [
           {
@@ -43,14 +44,14 @@ export default {
             content: 'Vim'
           },
           {
-            id: 3,
+            id: 4,
             date: '02月21日',
             content: 'Vim'
           }
         ],
         'birthday': [
           {
-            id: 4,
+            id: 5,
             date: '02月21日',
             content: 'Vim'
           }
@@ -68,7 +69,7 @@ export default {
       if (length >= 3) {
         return 'paper'
       } else {
-        return 'paper-big'
+        return 'paper paper-big'
       }
     }
   }
@@ -77,35 +78,35 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center; 
+  }
+  .card {
+    margin: .6rem;
+  }
+  .card-special {
+    margin: .6rem;
+    flex-grow: 1;
+  }
+  .paper {
+    position: relative;
+    height: 5.4rem;
+    width: 5.4rem;
+    text-align: center;
+  }
+  .paper-big {
+    height: 7.4rem;
+    width: 7.4rem;
+  }
   .badge {
     position: absolute;
     top: -.6rem;
     right: -.6rem;
   }
-  .flex-item {
-    text-align: center;
-  }
-  .paper {
-    position: relative;
-    display: inline-block;
-    height: 5.4rem;
-    width: 5.4rem;
-    margin: 1rem 0;
-    text-align: center;
-  }
-  .paper-big {
-    position: relative;
-    display: inline-block;
-    height: 7.4rem;
-    width: 7.4rem;
-    margin: 1rem 0;
-    text-align: center;
-  }
-  .paper-big span {
-    margin: 0 .3rem;
-  }
   .paper h3 {
-    margin: .8rem 0 0;
+    padding-top: .8rem;
   }
   .paper span {
     margin: 0 .2rem;
