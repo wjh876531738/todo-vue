@@ -6,11 +6,11 @@
       <mu-card-title :title="key" />
 
       <div class="box">
-        <div v-for="event, index in eventArr" :key="event.id" class="card" >
-          <mu-paper :class="getPaperSize(eventArr.length)" :zDepth="2">
+        <div v-for="event in eventArr" :key="event.id" class="card" >
+          <mu-paper class="paper" :zDepth="2">
             <mu-badge v-if="showBadge" :content="getDayDistince" class="badge" circle primary />
             <h3>{{ event.date }}</h3>
-            <span>{{ event.content }}</span>
+            <p>{{ event.content }}</p>
           </mu-paper>
         </div>
       </div>
@@ -31,29 +31,44 @@ export default {
           {
             id: 0,
             date: '02月21日',
-            content: 'Vim'
+            content: '宝宝生日'
           },
           {
             id: 1,
-            date: '02月21日',
-            content: 'Vim'
+            date: '06月29日',
+            content: '高考30天倒计时'
           },
           {
             id: 2,
-            date: '02月21日',
-            content: 'Vim'
+            date: '07月23日',
+            content: '拿身份证'
+          },
+          {
+            id: 2,
+            date: '07月26日',
+            content: '工程项目管理考试'
+          },
+          {
+            id: 2,
+            date: '08月02日',
+            content: '新公司的面试'
+          },
+          {
+            id: 2,
+            date: '08月21日',
+            content: 'bat校招'
           },
           {
             id: 4,
-            date: '02月21日',
-            content: 'Vim'
+            date: '09月21日',
+            content: '去长隆旅游'
           }
         ],
         'birthday': [
           {
             id: 5,
             date: '02月21日',
-            content: 'Vim'
+            content: '我生日'
           }
         ]
       }
@@ -65,50 +80,43 @@ export default {
     }
   },
   methods: {
-    getPaperSize (length) {
-      if (length >= 3) {
-        return 'paper'
-      } else {
-        return 'paper paper-big'
-      }
-    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .block {
+    width: 90%;
+    margin: 0 auto;
+  }
   .box {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center; 
+    justify-content: flex-start; 
   }
-  .card {
-    margin: .6rem;
-  }
-  .card-special {
-    margin: .6rem;
+  .box .card {
     flex-grow: 1;
+    height: 7rem;
+    margin: .8rem;
   }
-  .paper {
+  .box .card .paper {
     position: relative;
-    height: 5.4rem;
-    width: 5.4rem;
+    width: 100%;
+    height: 100%;
     text-align: center;
   }
-  .paper-big {
-    height: 7.4rem;
-    width: 7.4rem;
-  }
-  .badge {
+  .box .card .paper .badge {
     position: absolute;
     top: -.6rem;
     right: -.6rem;
   }
-  .paper h3 {
-    padding-top: .8rem;
+  .box .card .paper h3 {
+    margin: 0;
+    padding: 1rem;
   }
-  .paper span {
-    margin: 0 .2rem;
+  .box .card .paper p {
+    margin: 0;
+    padding: 0 .8rem .8rem;
   }
 </style>
