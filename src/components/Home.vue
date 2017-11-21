@@ -3,9 +3,9 @@
     <div class="header">
       <mu-paper>
         <mu-bottom-nav :value="choosedNav" shift @change="onNavChange">
-          <mu-bottom-nav-item value="remind" to="/remind" title="提醒" icon="music_note" />
-          <mu-bottom-nav-item value="todo" to="/" title="Todo" icon="ondemand_video" />
-          <mu-bottom-nav-item value="clock" to="memory" title="纪念日" icon="books" />
+          <mu-bottom-nav-item value="remind" to="/remind" title="已完成" icon="notifications" />
+          <mu-bottom-nav-item value="todo" to="/" title="Todo" icon="call_split" />
+          <mu-bottom-nav-item value="clock" to="memory" title="倒数日" icon="event_note" />
         </mu-bottom-nav>
       </mu-paper>
     </div>

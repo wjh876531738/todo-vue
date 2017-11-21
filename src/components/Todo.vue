@@ -3,17 +3,21 @@
     <div class="banner">
       <mu-card-title :title="title" :subTitle="getCurrentDate" class="card" />
     </div>
-    <div class="todo-list">
-      <mu-list>
+    <div>
+      <mu-list class="todo-list">
         <transition-group name="list">
           <div v-for="todo in todoListData" :key="todo.id" v-if="!todo.isCompleted">
-              <mu-list-item disableRipple @click="test(todo.content)" :title="todo.content">
-                <mu-checkbox v-model="todo.isCompleted" slot="left" @click="complete(todo)" />
+              <mu-list-item disableRipple @click="editTodo(todo.content)" :title="todo.content" titleClass="list-item-title">
+                <mu-checkbox uncheckIcon="favorite_border" checkedIcon="favorite" v-model="todo.isCompleted" slot="left" @click="completeTodo(todo)" />
               </mu-list-item>
               <mu-divider/>
           </div>
         </transition-group>
       </mu-list>
+    </div>
+
+    <div class="add-todo">
+      <mu-text-field icon="add" hintText="添加待办事项" hintTextClass="hint-text" :underlineShow="true" :fullWidth="true" v-model="newTodo" @change="addTodo" />
     </div>
   </div>
 </template>
@@ -25,40 +29,21 @@ export default {
     return {
       choosedNav: 'todo',
       title: '我的一天',
+      newTodo: '',
       todoListData: [
         {
           id: 0,
-          content: '回家',
+          content: '音乐播放器',
           isCompleted: false
         },
         {
           id: 1,
-          content: '学习Vim',
+          content: '树莓派控制中心',
           isCompleted: false
         },
         {
           id: 2,
-          content: 'Java',
-          isCompleted: false
-        },
-        {
-          id: 3,
-          content: 'Java',
-          isCompleted: false
-        },
-        {
-          id: 4,
-          content: 'Java',
-          isCompleted: false
-        },
-        {
-          id: 5,
-          content: 'Java',
-          isCompleted: false
-        },
-        {
-          id: 6,
-          content: 'Java',
+          content: '发现杯大赛报名',
           isCompleted: false
         }
       ]
@@ -86,11 +71,19 @@ export default {
     }
   },
   methods: {
-    complete (todo) {
+    completeTodo (todo) {
       todo.isCompleted = true
     },
-    test (todo) {
+    editTodo (todo) {
       console.log(todo)
+    },
+    addTodo () {
+      this.todoListData.unshift({
+        id: this.todoListData.length,
+        content: this.newTodo,
+        isCompleted: false
+      })
+      this.newTodo = ''
     }
   }
 }
@@ -108,5 +101,25 @@ export default {
   .list-enter, .list-leave-to{
     opacity: 0;
     transform: translateX(60px);
+  }
+  .todo-list {
+    min-height: calc(100vh);
+    padding-top: 0;
+  }
+  .add-todo {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 3.2rem;
+    background: #fff;
+    border-top: 1px solid #bcbcbc;
+  }
+  .mu-text-field-hint.show.hint-text {
+    word-break: break-all;
   }
 </style>

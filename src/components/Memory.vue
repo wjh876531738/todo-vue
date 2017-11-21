@@ -1,7 +1,7 @@
 <template>
   <div class="content">
 
-    <div class="block" v-for="eventArr, key in dateData" :key="key">
+    <div class="block" v-for="eventArr, key in eventData" :key="key">
 
       <mu-card-title :title="key" />
 
@@ -17,6 +17,15 @@
 
     </div>
 
+    <mu-float-button icon="add" class="btn-add-event" @click="formDialogOpened = true" />
+
+    <mu-dialog :open="formDialogOpened" @close="formDialogOpened = false" title="添加倒数日事件" scrollable>
+      <mu-text-field label="倒数日内容" hintText="添加倒数日内容" v-model="newEventContent" labelFloat/>
+      <mu-text-field hintText="事件所属类别" v-model="newEventCat" />
+      <mu-date-picker v-model="newEventDate" format="MM月DD日" hintText="选择日期"/>
+      <mu-raised-button label="添加" @click="addEvent"></mu-raised-button>
+    </mu-dialog>
+
   </div>
 </template>
 
@@ -25,8 +34,12 @@ export default {
   name: 'Memory',
   data () {
     return {
-      showBadge: true,
-      dateData: {
+      showBadge: false,
+      formDialogOpened: false,
+      newEventCat: '',
+      newEventDate: '',
+      newEventContent: '',
+      eventData: {
         'study': [
           {
             id: 0,
@@ -44,29 +57,29 @@ export default {
             content: '拿身份证'
           },
           {
-            id: 2,
+            id: 3,
             date: '07月26日',
             content: '工程项目管理考试'
           },
           {
-            id: 2,
+            id: 4,
             date: '08月02日',
             content: '新公司的面试'
           },
           {
-            id: 2,
+            id: 5,
             date: '08月21日',
             content: 'bat校招'
           },
           {
-            id: 4,
+            id: 6,
             date: '09月21日',
             content: '去长隆旅游'
           }
         ],
         'birthday': [
           {
-            id: 5,
+            id: 0,
             date: '02月21日',
             content: '我生日'
           }
@@ -77,9 +90,31 @@ export default {
   computed: {
     getDayDistince () {
       return '140'
+    },
+    getTodayDate () {
+      return '2017-11-20'
     }
   },
   methods: {
+    addEvent () {
+      if (this.newEventCat in this.eventData) {
+        this.eventData[this.newEventCat].push({
+          id: this.eventData[this.newEventCat].length,
+          date: this.newEventDate,
+          content: this.newEventContent
+        })
+      } else {
+        this.eventData[this.newEventCat] = [{
+          id: 0,
+          date: this.newEventDate,
+          content: this.newEventContent
+        }]
+      }
+      this.newEventCat = ''
+      this.newEventDate = ''
+      this.newEventContent = ''
+      this.formDialogOpened = false
+    }
   }
 }
 </script>
@@ -96,7 +131,7 @@ export default {
     justify-content: flex-start; 
   }
   .box .card {
-    flex-grow: 1;
+    flex: 1 0 auto;
     height: 7rem;
     margin: .8rem;
   }
@@ -118,5 +153,10 @@ export default {
   .box .card .paper p {
     margin: 0;
     padding: 0 .8rem .8rem;
+  }
+  .btn-add-event {
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
   }
 </style>
