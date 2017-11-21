@@ -18,38 +18,23 @@ export default {
       finishData: [
         {
           id: 0,
-          date: '02月21日',
-          content: '宝宝生日'
-        },
-        {
-          id: 1,
-          date: '06月29日',
+          date: '09月21日 15:30',
           content: '高考30天倒计时'
         },
         {
-          id: 2,
-          date: '07月23日',
+          id: 1,
+          date: '12月21日 11:30',
           content: '拿身份证'
         },
         {
           id: 2,
-          date: '07月26日',
+          date: '09月21日 21:30',
           content: '工程项目管理考试'
         },
         {
-          id: 2,
-          date: '08月02日',
-          content: '新公司的面试'
-        },
-        {
-          id: 2,
-          date: '08月21日',
-          content: 'bat校招'
-        },
-        {
-          id: 4,
-          date: '09月21日',
-          content: '去长隆旅游'
+          id: 3,
+          date: '09月25日 01:30',
+          content: '小明生日'
         }
       ]
     }

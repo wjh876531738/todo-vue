@@ -95,13 +95,6 @@ export default {
     background: #2196f3;
     padding: 3rem 1.6rem 1.2rem;
   }
-  .list-enter-active, .list-leave-active {
-    transition: all 1s;
-  }
-  .list-enter, .list-leave-to{
-    opacity: 0;
-    transform: translateX(60px);
-  }
   .todo-list {
     min-height: calc(100vh);
     padding-top: 0;
@@ -121,5 +114,12 @@ export default {
   }
   .mu-text-field-hint.show.hint-text {
     word-break: break-all;
+  }
+  .list-enter-to, .list-leave-to {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to{
+    opacity: 0;
+    transform: translateX(60px);
   }
 </style>
