@@ -3,7 +3,7 @@
     <h2>已完成</h2>
     <mu-timeline class="timeline">
       <mu-timeline-item v-for="finished in todoListData" :key="finished.id" v-if="finished.isCompleted">
-        <span slot="time">{{ finished.date }}</span>
+        <span slot="time">{{ getDate(finished.finishedAt) }}</span>
         <span slot="des">{{ finished.content }}</span>
       </mu-timeline-item>
     </mu-timeline>
@@ -15,16 +15,14 @@ export default {
   name: 'Remind',
   data () {
     return {
-      todoListData: JSON.parse(localStorage.getItem('todoListData')) || [
-        {
-          id: 0,
-          date: newDate().getMonth()+1 + '月' + new Date().getDate + '日 ' + new Date().getHours() + ':' + new Date().getMinutes(),
-          content: '还没有完成的事情哦。'
-        }
-      ]
+      todoListData: JSON.parse(localStorage.getItem('todoListData')) || []
     }
   },
   methods: {
+    getDate (timestamp) {
+      let date = new Date(timestamp)
+      return date.getMonth() + '月' + date.getDate() + '日 ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+    }
   }
 }
 </script>

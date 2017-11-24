@@ -1,7 +1,7 @@
 <template>
   <div class="content">
 
-    <div class="block" v-for="eventArr, key in eventData" :key="key">
+    <div class="block" v-for="eventArr, key in eventListData" :key="key">
 
       <div class="header">
         <h2>{{ key }}</h2>
@@ -12,7 +12,7 @@
         <div v-for="event in eventArr" :key="event.id" class="card" >
           <mu-paper class="paper" :zDepth="2">
             <transition name="fade">
-              <mu-badge v-show="showBadge" :content="getDayDistince" class="badge" circle primary />
+              <mu-badge v-show="showBadge" :content="getDayDistince(event.date)" class="badge" circle primary />
             </transition>
             <h3>{{ event.date }}</h3>
             <p>{{ event.content }}</p>
@@ -26,7 +26,7 @@
 
     <mu-dialog :open="formDialogOpened" @close="formDialogOpened = false" title="添加倒数日事件" scrollable>
       <mu-text-field label="倒数日内容" hintText="添加倒数日内容" :errorText="inputContentError" @focus="inputContentError = ''" @change="setValue(CONTENT, $event)" labelFloat/>
-      <mu-auto-complete hintText="事件所属类别" :errorText="inputCatError" :maxHeight="180" :dataSource="getAllCat" filter="noFilter" @focus="inputCatError = ''" @change="setValue(CAT, $event)" openOnFocus />
+      <mu-auto-complete hintText="事件所属类别" :errorText="inputCatError" :maxHeight="180" :dataSource="getAllCat()" filter="noFilter" @focus="inputCatError = ''" @input="setValue(CAT, $event)" openOnFocus />
       <mu-date-picker hintText="选择日期" :errorText="inputDateError" format="MM月DD日" @focus="inputDateError = ''" @change="setValue(DATE, $event)" />
       <mu-raised-button label="添加" @click="addEvent"></mu-raised-button>
     </mu-dialog>
@@ -53,47 +53,22 @@ export default {
       inputCatError: '',
       inputDateError: '',
       inputContentError: '',
-      eventData: {
-        '学习': [
-          {
-            id: 0,
-            date: '02月21日',
-            content: '高考30天倒计时'
-          },
-          {
-            id: 1,
-            date: '06月29日',
-            content: '拿身份证'
-          },
-          {
-            id: 2,
-            date: '07月26日',
-            content: '工程项目管理考试'
-          }
-        ],
-        '生日': [
-          {
-            id: 0,
-            date: '02月21日',
-            content: '小明生日'
-          }
-        ]
-      }
+      eventListData: JSON.parse(localStorage.getItem('eventListData')) || {}
     }
   },
   computed: {
-    getDayDistince () {
-      return '140'
-    },
+  },
+  methods: {
     getAllCat () {
       let result = []
-      for (var i in this.eventData) {
+      for (var i in this.eventListData) {
         result.push(i)
       }
       return result
-    }
-  },
-  methods: {
+    },
+    getDayDistince (date) {
+      return '140'
+    },
     setValue (field, event) {
       switch (field) {
         case this.CAT:
@@ -109,19 +84,20 @@ export default {
     },
     addEvent () {
       if (this.newEventCat !== '' && this.newEventDate !== '' && this.newEventContent !== '') {
-        if (this.newEventCat in this.eventData) {
-          this.eventData[this.newEventCat].push({
-            id: this.eventData[this.newEventCat].length,
+        if (this.newEventCat in this.eventListData) {
+          this.eventListData[this.newEventCat].push({
+            id: this.eventListData[this.newEventCat].length,
             date: this.newEventDate,
             content: this.newEventContent
           })
         } else {
-          this.eventData[this.newEventCat] = [{
+          this.eventListData[this.newEventCat] = [{
             id: 0,
             date: this.newEventDate,
             content: this.newEventContent
           }]
         }
+        localStorage.setItem('eventListData', JSON.stringify(this.eventListData))
         this.newEventCat = ''
         this.newEventDate = ''
         this.newEventContent = ''
@@ -138,6 +114,8 @@ export default {
         }
       }
     }
+  },
+  mounted () {
   }
 }
 </script>

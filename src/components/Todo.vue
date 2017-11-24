@@ -8,7 +8,7 @@
         <transition-group name="list">
           <div v-for="todo in todoListData" :key="todo.id" v-if="!todo.isCompleted">
               <mu-list-item disableRipple @click="editTodo(todo.content)" :title="todo.content" titleClass="list-item-title">
-                <mu-checkbox uncheckIcon="favorite_border" checkedIcon="favorite" slot="left" v-model="todo.isCompleted" @input="completeTodo" />
+                <mu-checkbox uncheckIcon="favorite_border" checkedIcon="favorite" slot="left" v-model="todo.isCompleted" @input="completeTodo(todo)" />
               </mu-list-item>
               <mu-divider/>
           </div>
@@ -30,13 +30,7 @@ export default {
       choosedNav: 'todo',
       title: '我的一天',
       newTodo: '',
-      todoListData: JSON.parse(localStorage.getItem('todoListData')) || [
-        {
-          id: 0,
-          content: '可以点击左方按钮完成事项',
-          isCompleted: false
-        }
-      ]
+      todoListData: JSON.parse(localStorage.getItem('todoListData')) || []
     }
   },
   computed: {
@@ -61,21 +55,20 @@ export default {
     }
   },
   methods: {
-    completeTodo () {
+    completeTodo (todo) {
+      todo.finishedAt = new Date().getTime()
       localStorage.setItem('todoListData', JSON.stringify(this.todoListData))
     },
     editTodo (todo) {
-      console.log(todo)
     },
     addTodo () {
-      let localTodoListData = JSON.parse(localStorage.getItem('todoListData')) || []
-      localTodoListData.unshift({
-        id: localTodoListData.length,
+      this.todoListData.unshift({
+        id: this.todoListData.length,
         content: this.newTodo,
-        isCompleted: false
+        isCompleted: false,
+        createdAt: new Date().getTime()
       })
-      this.todoListData = localTodoListData
-      localStorage.setItem('todoListData', JSON.stringify(localTodoListData))
+      localStorage.setItem('todoListData', JSON.stringify(this.todoListData))
       this.newTodo = ''
     }
   }
