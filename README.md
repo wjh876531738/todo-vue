@@ -27,5 +27,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 3. Edit and delete the Event item.
 4. Fix the data of badage in Event page.
 5. Delete finished item.
-6. Fix the icon bug.
-7. Fix the import method of Muse-ui.
+6. Fix the import method of Muse-ui.
