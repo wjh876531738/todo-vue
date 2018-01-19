@@ -1,0 +1,28 @@
+* x_todo_vue
+  
+  #+BEGIN_QUOTE
+  This is a To-do web app builded by Vue.js with Muse-ui.
+  #+END_QUOTE
+  
+** Build Setup
+   
+   #+BEGIN_SRC bash
+   # install dependencies
+   npm install
+   
+   # serve with hot reload at localhost:8080
+   npm run dev
+   
+   # build for production with minification
+   npm run build
+  
+   # build for production and view the bundle analyzer report
+   npm run build --report
+   #+END_SRC
+   
+   For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+** 功能 
+   - 提醒事项的添加、完成
+   - 倒数日事件的添加
+   - 已完成事项的查看
