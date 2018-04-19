@@ -1,0 +1,22 @@
+{
+    "scope": "/",
+    "name": "TO-DO",
+    "short_name": "todo",
+    "start_url": "/todo",
+    "display": "standalone",
+    "description": "The TO-DO of wjh",
+    "orientation": "portrait",
+    "theme_color": "#2196f3",
+    "background_color": "#fff",
+    "icons": [{
+      "src": "./todo_icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./todo_icon128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+    ]
+}
