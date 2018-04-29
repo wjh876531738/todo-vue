@@ -36,22 +36,10 @@ export default {
   computed: {
     getCurrentDate () {
       let date = new Date()
-      switch (date.getDay()) {
-        case 0:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期日'
-        case 1:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期一'
-        case 2:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期二'
-        case 3:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期三'
-        case 4:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期四'
-        case 5:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期五'
-        case 6:
-          return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期六'
-      }
+
+      let weekList = ['日', '一', '二', '三', '四', '五', '六']
+
+      return (date.getMonth() + 1) + '月' + date.getDate() + '日 星期' + weekList[date.getDay()]
     }
   },
   methods: {

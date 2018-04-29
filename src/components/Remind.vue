@@ -15,14 +15,30 @@ export default {
   name: 'Remind',
   data () {
     return {
-      todoListData: JSON.parse(localStorage.getItem('todoListData')) || []
+      todoListData: []
     }
   },
   methods: {
     getDate (timestamp) {
       let date = new Date(timestamp)
-      return date.getMonth() + '月' + date.getDate() + '日 ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+      return (date.getMonth() + 1) + '月' + date.getDate() + '日 ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
     }
+  },
+  mounted () {
+    this.todoListData = JSON.parse(localStorage.getItem('todoListData'))
+
+    this.todoListData = this.todoListData.sort((x, y) => {
+      if (x.createdAt < y.createdAt) {
+        return 1
+      }
+      if (x.createdAt > y.createdAt) {
+        return -1
+      }
+      return 0
+    })
+    this.todoListData.map((todoItem) => {
+      console.log(todoItem.createdAt)
+    })
   }
 }
 </script>

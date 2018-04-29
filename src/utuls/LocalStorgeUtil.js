@@ -5,5 +5,6 @@ appendToList (key, value, reverse=False) {
     localStorage.setItem(key, localData)
     return localData
 }
+
 deleteFromList (key, index) {
 }
