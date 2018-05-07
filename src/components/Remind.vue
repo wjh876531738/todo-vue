@@ -46,7 +46,7 @@ export default {
 <style scoped>
   .finish-list {
     width: 80%;
-    margin: 2rem auto 0;
+    margin: 5rem auto 0;
   }
   .finish-list .timeline {
     padding: 0 1rem;

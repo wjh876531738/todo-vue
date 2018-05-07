@@ -3,7 +3,7 @@
     <div class="banner">
       <mu-card-title :title="title" :subTitle="getCurrentDate" class="card" />
     </div>
-    <div>
+    <div class="list-wrapper">
       <mu-list class="todo-list">
         <transition-group name="list">
           <div v-for="todo in todoListData" :key="todo.id" v-if="!todo.isCompleted">
@@ -65,9 +65,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 55px;
+    z-index: 999;
+  }
   .card {
     background: #2196f3;
     padding: 3rem 1.6rem 1.2rem;
+  }
+  .list-wrapper {
+    margin-top: 180px;
   }
   .todo-list {
     min-height: calc(100vh);
@@ -82,7 +92,7 @@ export default {
     justify-content: center;
     align-content: center;
     width: 100%;
-    height: 3.2rem;
+    height: 50px;
     background: #fff;
     border-top: 1px solid #bcbcbc;
   }
